@@ -1,0 +1,16 @@
+{
+  "name": "testes-ia-hub-leitura",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Aplicacao demonstrativa e testes automatizados da regra de bloqueio por atraso no Hub de Leitura",
+  "scripts": {
+    "start": "node app/server.js",
+    "dev": "node --watch app/server.js",
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "test:api": "cypress run --spec 'cypress/e2e/api.cy.js'",
+    "test:ui": "cypress run --spec 'cypress/e2e/interface.cy.js'"
+  },
+  "dependencies": { "express": "^4.21.2" },
+  "devDependencies": { "cypress": "^15.11.0" }
+}
