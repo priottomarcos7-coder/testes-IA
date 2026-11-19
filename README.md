@@ -1,29 +1,46 @@
 # Testes com Inteligência Artificial — Plano de Testes Hub de Leitura
 
+[![QA](https://img.shields.io/badge/Área-Quality%20Assurance-blue)](https://github.com/priottomarcos7-coder/qa-portifolio)
+[![AI](https://img.shields.io/badge/IA-Apoio%20à%20análise-purple)](https://github.com/priottomarcos7-coder/testes-IA)
+[![Status](https://img.shields.io/badge/Status-Projeto%20de%20estudo-informational)](https://github.com/priottomarcos7-coder/testes-IA)
+
 ## Objetivo
 
-Projeto desenvolvido para demonstrar a aplicação de Inteligência Artificial como ferramenta de apoio ao processo de Qualidade de Software.
+Projeto de estudo desenvolvido para demonstrar como a Inteligência Artificial pode apoiar atividades de Qualidade de Software, sem substituir a análise crítica do QA.
 
-O trabalho utiliza como contexto a funcionalidade de bloqueio automático de usuários que possuem livros com mais de 7 dias de atraso.
+O contexto utilizado é uma funcionalidade de biblioteca que bloqueia automaticamente usuários com livros em atraso por mais de 7 dias. O trabalho documenta análise de requisitos, cenários, estratégia, riscos e um mini plano de testes.
+
+> **Importante:** este repositório documenta planejamento e análise de testes. Não representa uma suíte de testes executada nem comprova que a funcionalidade foi implementada no sistema de referência.
+
+## Fluxo de trabalho
+
+```mermaid
+flowchart TD
+    A[História de usuário] --> B[Análise e dúvidas]
+    B --> C[Cenários de teste]
+    C --> D[Estratégia e riscos]
+    D --> E[Mini plano de testes]
+    E --> F[Revisão crítica com apoio de IA]
+    F --> G[Documentação refinada]
+```
 
 ## O que desenvolvi
 
 - Análise da história de usuário e identificação de ambiguidades.
-- Levantamento de perguntas para esclarecimento com produto.
-- Criação de cenários de teste positivos, negativos, de limite e de erro.
-- Definição de estratégia de testes por tipo de teste.
-- Identificação de riscos e respectivas ações de mitigação.
-- Elaboração de um mini plano de testes.
-- Utilização de Inteligência Artificial para apoiar análise e geração de ideias de testes.
-- Criação e refinamento de prompts.
-- Revisão crítica das respostas geradas pela IA.
-- Adaptação das sugestões de IA de acordo com o contexto e os requisitos do projeto.
+- Perguntas para esclarecer regras com o time de produto.
+- Cenários positivos, negativos, de limite, erro e integração.
+- Definição de prioridades, pré-condições, dados e resultados esperados.
+- Estratégia de testes funcionais, API, interface, integração, exploratórios e regressão.
+- Identificação de riscos e ações de mitigação.
+- Matriz de rastreabilidade entre requisitos e cenários.
+- Prompts para análise, geração e revisão de cenários.
+- Exemplo documentado de refinamento de prompt e revisão humana.
 
-## Aplicação da Inteligência Artificial
+## Como a IA foi utilizada
 
-A IA foi utilizada como apoio ao trabalho de QA, principalmente para ampliar a análise de cenários, riscos e possibilidades de teste.
+A IA foi usada para ampliar possibilidades de análise e organizar ideias de teste. As respostas foram tratadas como sugestões: regras não descritas foram marcadas como pendentes de confirmação, e os cenários foram revisados para evitar assumir comportamentos que a história não define.
 
-O resultado gerado pela IA não foi tratado como verdade absoluta. As sugestões foram revisadas criticamente e adaptadas quando necessário, especialmente nos pontos que dependem de confirmação com o time de produto.
+Um exemplo importante é o limite de 7 dias: a história diz “mais de 7 dias”, então 8 dias é um exemplo claro de bloqueio, enquanto o comportamento exatamente no 7º dia precisa ser confirmado com produto.
 
 ## Estrutura do projeto
 
@@ -35,52 +52,39 @@ docs/
 ├── 04-riscos.md
 ├── 05-mini-plano-de-testes.md
 ├── 06-prompts-ia.md
-└── 07-conclusao.md
+├── 07-conclusao.md
+└── 08-matriz-rastreabilidade.md
 
 README.md
 ```
 
-## Etapas desenvolvidas
+## Documentação
 
-### 1. Análise da história
+| Documento | Conteúdo |
+|---|---|
+| [Análise da história](docs/01-analise-historia.md) | Ambiguidades, perguntas e regras a esclarecer |
+| [Cenários de teste](docs/02-cenarios-de-teste.md) | 20 cenários com prioridade, pré-condições e resultados |
+| [Estratégia de testes](docs/03-estrategia-de-testes.md) | Abordagens de validação e ordem sugerida |
+| [Análise de riscos](docs/04-riscos.md) | Riscos, impactos e mitigações |
+| [Mini plano de testes](docs/05-mini-plano-de-testes.md) | Objetivo, escopo e critérios de entrada/saída |
+| [Prompts e revisão com IA](docs/06-prompts-ia.md) | Prompts, refinamento e revisão humana |
+| [Conclusão](docs/07-conclusao.md) | Principais aprendizados e pontos críticos |
+| [Matriz de rastreabilidade](docs/08-matriz-rastreabilidade.md) | Relação entre requisitos e cenários |
 
-Analisei a funcionalidade, identifiquei pontos que poderiam gerar interpretações diferentes e registrei perguntas para o time de produto.
+## Resultado e aprendizado
 
-### 2. Cenários de teste
-
-Foram elaborados cenários considerando comportamentos esperados, situações negativas, limites e possíveis erros.
-
-### 3. Estratégia de testes
-
-Foi definida uma estratégia considerando diferentes tipos de validação e a prioridade dos riscos identificados.
-
-### 4. Análise de riscos
-
-Foram levantados riscos relacionados à regra de bloqueio e definidas possíveis formas de mitigação.
-
-### 5. Mini plano de testes
-
-As informações foram consolidadas em um plano objetivo para orientar a execução dos testes.
-
-### 6. Prompts e refinamento
-
-Foram registrados os prompts utilizados e o processo de refinamento das solicitações feitas à IA.
-
-## Resultado esperado
-
-O projeto demonstra como a Inteligência Artificial pode apoiar atividades de QA, acelerando a geração de possibilidades e ajudando na análise, sem substituir a avaliação crítica do profissional.
+O projeto demonstra que o uso de IA em QA exige direcionamento, validação e senso crítico. Um prompt mais específico pode ampliar a cobertura, mas cabe ao profissional verificar se as sugestões fazem sentido para os requisitos e para o produto.
 
 ## Repositório de referência
 
-Hub de Leitura Integrado — EBAC-QE:
-
-https://github.com/EBAC-QE/hub-de-leitura-integrado
+[Hub de Leitura Integrado — EBAC-QE](https://github.com/EBAC-QE/hub-de-leitura-integrado)
 
 ## Autor
 
-Marcos Priotto
+**Marcos Priotto**
 
 Projeto desenvolvido como parte da formação em Engenharia de Qualidade de Software na EBAC.
+
 ---
 
 # English Version
@@ -89,76 +93,65 @@ Projeto desenvolvido como parte da formação em Engenharia de Qualidade de Soft
 
 ## Goal
 
-This project demonstrates the use of Artificial Intelligence as a supporting tool in the Software Quality process.
+This study project demonstrates how Artificial Intelligence can support Software Quality activities without replacing the QA professional's critical judgment.
 
-The project focuses on the feature that automatically blocks users who have books overdue by more than 7 days.
+The context is a library feature that automatically blocks users with books overdue by more than 7 days. The work documents requirements analysis, test scenarios, strategy, risks, and a mini test plan.
+
+> **Important:** this repository documents test planning and analysis. It is not an executed test suite and does not prove that the feature has been implemented in the reference system.
+
+## Workflow
+
+```mermaid
+flowchart TD
+    A[User story] --> B[Analysis and questions]
+    B --> C[Test scenarios]
+    C --> D[Strategy and risks]
+    D --> E[Mini test plan]
+    E --> F[Critical review with AI support]
+    F --> G[Refined documentation]
+```
 
 ## What I Developed
 
-- Analysis of the user story and identification of ambiguities.
-- Questions to clarify requirements with the product team.
-- Positive, negative, boundary, and error test scenarios.
-- Test strategy by test type.
+- User story analysis and ambiguity identification.
+- Questions to clarify business rules with the product team.
+- Positive, negative, boundary, error, and integration scenarios.
+- Priorities, preconditions, test data, and expected results.
+- Functional, API, UI, integration, exploratory, and regression test strategy.
 - Risk identification and mitigation actions.
-- A concise test plan.
-- Use of AI to support analysis and generate test ideas.
-- Prompt creation and refinement.
-- Critical review of AI-generated responses.
-- Adaptation of AI suggestions to the project context and requirements.
+- Requirements-to-test traceability matrix.
+- Prompts for analysis, scenario generation, and review.
+- A documented example of prompt refinement and human review.
 
 ## Use of Artificial Intelligence
 
-AI supported QA activities, mainly by expanding the analysis of scenarios, risks, and testing possibilities.
+AI was used to expand analysis possibilities and organize test ideas. Its output was treated as suggestions: undefined rules were marked for product clarification, and scenarios were reviewed to avoid assuming behavior not specified in the story.
 
-AI-generated output was not treated as absolute truth. Suggestions were critically reviewed and adapted when necessary, especially when requirements needed confirmation from the product team.
+For example, the story says “more than 7 days.” Therefore, 8 days is a clear blocking example, while behavior on exactly day 7 must be confirmed with the product team.
 
-## Project Structure
+## Project Documentation
 
-```text
-docs/
-├── 01-analise-historia.md
-├── 02-cenarios-de-teste.md
-├── 03-estrategia-de-testes.md
-├── 04-riscos.md
-├── 05-mini-plano-de-testes.md
-├── 06-prompts-ia.md
-└── 07-conclusao.md
+| Document | Content |
+|---|---|
+| [User story analysis](docs/01-analise-historia.md) | Ambiguities, questions, and rules to clarify |
+| [Test scenarios](docs/02-cenarios-de-teste.md) | 20 scenarios with priorities, preconditions, and expected results |
+| [Test strategy](docs/03-estrategia-de-testes.md) | Validation approaches and suggested order |
+| [Risk analysis](docs/04-riscos.md) | Risks, impact, and mitigation |
+| [Mini test plan](docs/05-mini-plano-de-testes.md) | Objective, scope, and entry/exit criteria |
+| [AI prompts and review](docs/06-prompts-ia.md) | Prompts, refinement, and human review |
+| [Conclusion](docs/07-conclusao.md) | Main learnings and critical points |
+| [Traceability matrix](docs/08-matriz-rastreabilidade.md) | Relationship between requirements and scenarios |
 
-README.md
-```
+## Learning Outcome
 
-## Project Stages
-
-### 1. User Story Analysis
-I analyzed the feature, identified points that could lead to different interpretations, and recorded questions for the product team.
-
-### 2. Test Scenarios
-Scenarios were created to cover expected behavior, negative cases, boundary conditions, and potential errors.
-
-### 3. Test Strategy
-A strategy was defined based on different validation types and the priority of identified risks.
-
-### 4. Risk Analysis
-Risks related to the blocking rule were identified, and possible mitigation approaches were defined.
-
-### 5. Mini Test Plan
-The information was consolidated into a concise plan to guide test execution.
-
-### 6. Prompts and Refinement
-The prompts used and the process of refining requests to the AI were documented.
-
-## Expected Results
-
-The project demonstrates how AI can support QA activities by speeding up idea generation and helping with analysis, without replacing the professional's critical judgment.
+The project shows that using AI in QA requires direction, validation, and critical thinking. A more specific prompt can improve test coverage, but the professional must verify whether the suggestions match the requirements and product behavior.
 
 ## Reference Repository
 
-Reading Hub Integrated — EBAC-QE:
-
-https://github.com/EBAC-QE/hub-de-leitura-integrado
+[Reading Hub Integrated — EBAC-QE](https://github.com/EBAC-QE/hub-de-leitura-integrado)
 
 ## Author
 
-Marcos Priotto
+**Marcos Priotto**
 
 Project developed as part of the Software Quality Engineering training program at EBAC.
