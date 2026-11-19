@@ -1,25 +1,39 @@
 # 2. Cenários de Teste
 
-| ID | Tipo | Cenário | Resultado esperado |
-|---|---|---|---|
-| CT01 | Positivo | Usuário com 8 dias de atraso | Usuário é bloqueado automaticamente |
-| CT02 | Limite | Usuário com exatamente 7 dias de atraso | Comportamento segue a regra definida pelo produto |
-| CT03 | Limite/Negativo | Usuário com 6 dias de atraso | Usuário não é bloqueado |
-| CT04 | Positivo | Usuário sem atraso | Usuário permanece desbloqueado |
-| CT05 | Negativo | Usuário bloqueado tenta nova reserva | Reserva é recusada |
-| CT06 | Negativo | Usuário bloqueado tenta renovar | Renovação é recusada |
-| CT07 | Positivo | Bloqueio no perfil | Perfil apresenta status e motivo |
-| CT08 | Positivo | Bloqueio no painel administrativo | Administrador visualiza o bloqueio |
-| CT09 | Positivo | Lista de usuários bloqueados | Lista apresenta usuário, motivo e dias de atraso |
-| CT10 | Positivo | Devolução do livro atrasado | Bloqueio é removido automaticamente quando não há outro atraso elegível |
-| CT11 | Regra/Negativo | Usuário devolve um de dois livros atrasados | Continua bloqueado se outro livro atender à regra |
-| CT12 | Positivo | Administrador remove bloqueio manualmente | Bloqueio é removido conforme regra definida |
-| CT13 | Negativo | Usuário sem permissão tenta desbloquear | Operação é negada |
-| CT14 | Erro | Falha no cálculo dos dias de atraso | Sistema não cria bloqueio incorreto e registra o erro |
-| CT15 | Erro | Falha na rotina automática | Sistema trata/reprocessa a falha conforme regra |
-| CT16 | Positivo | Reinicialização após bloqueio | Status permanece consistente |
-| CT17 | Integração | API x interface | Status da API corresponde ao apresentado na interface |
-| CT18 | Positivo | Mensagem de bloqueio | Mensagem informa claramente motivo e restrições |
+Os cenários abaixo foram definidos a partir da história de usuário e das dúvidas levantadas na análise. Os comportamentos que dependem de decisão do time de produto estão identificados como **Pendente de regra** e não devem ser considerados critérios fechados até a confirmação.
+
+## Convenções
+
+- **Prioridade alta:** impacto direto no bloqueio, desbloqueio ou autorização.
+- **Prioridade média:** apresentação de informações e consistência entre componentes.
+- **Prioridade baixa:** comportamento complementar, sem impacto imediato no fluxo principal.
+- Os dados de teste são exemplos e devem ser adaptados ao ambiente disponível.
+- A regra descrita na história é “mais de 7 dias”; portanto, 8 dias é o primeiro exemplo inequívoco de bloqueio. O comportamento no 7º dia precisa ser confirmado.
+
+## Cenários
+
+| ID | Prioridade | Tipo | Pré-condição / dados | Ação | Resultado esperado |
+|---|---|---|---|---|---|
+| CT01 | Alta | Positivo | Usuário ativo com um empréstimo em atraso há 8 dias | Executar processamento da regra | Usuário passa para bloqueado e o motivo do bloqueio fica registrado |
+| CT02 | Alta | Limite | Usuário ativo com atraso de exatamente 7 dias | Executar processamento | Resultado fica pendente até produto confirmar se o limite é inclusivo ou exclusivo |
+| CT03 | Alta | Negativo | Usuário ativo com atraso de 6 dias | Executar processamento | Usuário permanece desbloqueado |
+| CT04 | Alta | Positivo | Usuário ativo sem empréstimos atrasados | Executar processamento | Usuário permanece desbloqueado |
+| CT05 | Alta | Negativo | Usuário já bloqueado | Tentar criar nova reserva | Operação é recusada e mensagem explica a restrição |
+| CT06 | Alta | Negativo | Usuário já bloqueado | Tentar renovar empréstimo | Operação é recusada conforme regra de negócio |
+| CT07 | Média | Interface | Usuário bloqueado por atraso | Consultar perfil | Status e motivo do bloqueio são exibidos corretamente |
+| CT08 | Média | Interface | Existe usuário bloqueado | Consultar painel administrativo | Administrador visualiza o status atualizado |
+| CT09 | Média | Interface | Existem usuários bloqueados | Consultar lista administrativa | Lista apresenta os usuários e os campos definidos pelo produto |
+| CT10 | Alta | Positivo | Usuário bloqueado; nenhum outro empréstimo mantém a condição de bloqueio | Registrar devolução do livro em atraso e processar atualização | Bloqueio é removido conforme a regra de desbloqueio confirmada |
+| CT11 | Alta | Regra de negócio | Usuário possui dois empréstimos que atendem à regra de bloqueio | Devolver apenas um dos livros | Usuário permanece bloqueado enquanto o outro empréstimo mantiver a condição |
+| CT12 | Alta | Permissão | Administrador com permissão de desbloqueio | Remover bloqueio manualmente | Ação é concluída e fica registrada conforme regra de auditoria |
+| CT13 | Alta | Segurança | Usuário sem permissão administrativa | Tentar remover bloqueio | Operação é negada e o status original é mantido |
+| CT14 | Alta | Erro | Dados de empréstimo inválidos ou indisponíveis | Executar cálculo do atraso | Sistema não aplica bloqueio incorreto e registra/trata a falha |
+| CT15 | Alta | Resiliência | Rotina automática indisponível ou com falha simulada | Executar processamento | Falha é registrada e existe tratamento/reprocessamento conforme decisão técnica |
+| CT16 | Média | Persistência | Usuário foi bloqueado corretamente | Reiniciar ou consultar novamente o sistema | Status do bloqueio permanece consistente |
+| CT17 | Alta | Integração | Usuário bloqueado com acesso à API e interface | Consultar status nos dois canais | API e interface apresentam o mesmo estado |
+| CT18 | Média | Interface | Usuário bloqueado tenta realizar operação restrita | Consultar mensagem apresentada | Mensagem informa claramente o motivo e a ação impedida |
+| CT19 | Alta | Regressão | Usuário regular, sem atraso elegível | Realizar reserva e renovação permitidas | Funcionalidades continuam operando normalmente |
+| CT20 | Média | Auditoria | Bloqueio/desbloqueio realizado | Consultar histórico, se previsto | Histórico registra ator, data, ação e motivo conforme requisito |
 
 ## Cenários detalhados em Gherkin
 
@@ -28,57 +42,48 @@
 ```gherkin
 Cenário: Bloquear usuário com livro atrasado há mais de 7 dias
   Dado que o usuário possui um livro com 8 dias de atraso
-  Quando o sistema processar a regra de bloqueio
-  Então o usuário deve ser bloqueado
+  E o usuário está ativo e desbloqueado
+  Quando a rotina de bloqueio for processada
+  Então o usuário deve ficar bloqueado
   E o motivo deve indicar o atraso do livro
-  E a quantidade de dias de atraso deve ser apresentada
 ```
 
-### CT02 – Limite de 7 dias
+### CT02 – Validar o limite de 7 dias
 
 ```gherkin
-Cenário: Validar o limite de 7 dias
+Cenário: Avaliar usuário com exatamente 7 dias de atraso
   Dado que o usuário possui um livro com exatamente 7 dias de atraso
-  Quando o sistema processar a regra de bloqueio
-  Então o comportamento deve seguir a regra definida pelo produto
+  Quando a rotina de bloqueio for processada
+  Então o resultado deve respeitar a regra confirmada pelo time de produto
 ```
 
 ### CT05 – Usuário bloqueado tentando reservar
 
 ```gherkin
 Cenário: Impedir nova reserva para usuário bloqueado
-  Dado que o usuário está bloqueado
-  Quando ele tentar realizar uma nova reserva
-  Então a reserva deve ser recusada
-  E uma mensagem adequada deve informar o motivo
-```
-
-### CT06 – Usuário bloqueado tentando renovar
-
-```gherkin
-Cenário: Impedir renovação para usuário bloqueado
-  Dado que o usuário está bloqueado
-  Quando ele tentar renovar
+  Dado que o usuário está bloqueado por atraso
+  Quando tentar realizar uma nova reserva
   Então a operação deve ser recusada
+  E uma mensagem deve informar o motivo da restrição
 ```
 
 ### CT10 – Desbloqueio após devolução
 
 ```gherkin
-Cenário: Remover bloqueio após devolução
+Cenário: Remover bloqueio após regularização
   Dado que o usuário está bloqueado por atraso
-  E não possui outro livro que mantenha a condição de bloqueio
-  Quando o livro for devolvido
-  Então o bloqueio deve ser removido automaticamente
+  E não possui outro empréstimo que mantenha a condição de bloqueio
+  Quando devolver o livro em atraso
+  E o sistema atualizar a situação do usuário
+  Então o bloqueio deve ser removido conforme a regra definida
 ```
 
 ### CT11 – Outro livro continua atrasado
 
 ```gherkin
-Cenário: Manter bloqueio quando outro livro continua atrasado
-  Dado que o usuário possui dois livros atrasados
-  E ambos atendem à regra de bloqueio
-  Quando o usuário devolver apenas um livro
+Cenário: Manter bloqueio enquanto existir outro empréstimo elegível
+  Dado que o usuário possui dois livros que atendem à regra de bloqueio
+  Quando devolver apenas um dos livros
   Então o usuário deve continuar bloqueado
 ```
 
@@ -87,6 +92,19 @@ Cenário: Manter bloqueio quando outro livro continua atrasado
 ```gherkin
 Cenário: Impedir remoção de bloqueio sem autorização
   Dado que o usuário não possui permissão administrativa
-  Quando tentar remover um bloqueio
+  E existe um bloqueio ativo
+  Quando tentar remover o bloqueio
   Então a operação deve ser recusada
+  E o bloqueio deve permanecer ativo
 ```
+
+## Observações para execução
+
+1. Confirmar com produto o limite exato de dias, o fuso horário e o momento do processamento automático.
+2. Confirmar se a regra considera dias corridos ou outra forma de contagem.
+3. Confirmar como reservas existentes e renovações são tratadas.
+4. Confirmar o comportamento do desbloqueio automático e manual.
+5. Preparar massa de dados com usuários regulares, bloqueados e com múltiplos empréstimos.
+6. Registrar resultado obtido e evidências durante a execução.
+
+Este documento descreve cenários planejados. A execução depende de ambiente, dados e funcionalidades disponíveis no sistema de referência.
