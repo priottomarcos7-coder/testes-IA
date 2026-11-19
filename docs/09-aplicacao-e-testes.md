@@ -1,4 +1,4 @@
-# Aplicação demonstrativa e execução dos 20 cenários
+# Aplicação demonstrativa e testes automatizados
 
 ## Escopo
 
@@ -29,7 +29,7 @@ Em outro terminal:
 npm test
 ```
 
-A API fica em `http://localhost:3000`. A interface administrativa está em `/api/ui/admin` e o perfil em `/api/ui/profile/2`.
+A API fica em `http://localhost:3000`. O painel estático está em `/admin.html` e o perfil em `/profile.html?id=2`. O servidor também possui rotas alternativas `/api/ui/admin` e `/api/ui/profile/:id`.
 
 ## Massa de dados
 
@@ -37,7 +37,7 @@ O endpoint `POST /api/test/reset` restaura dados conhecidos para execução repe
 
 ## Cenários
 
-A suíte `cypress/e2e/api.cy.js` contém um teste automatizado para cada ID CT01–CT20. CT02 interpreta o requisito “mais de 7 dias” como limite exclusivo. CT19 valida reserva e renovação permitidas para um usuário regular com empréstimo ativo na massa de dados.
+A suíte contém 20 testes de API em `cypress/e2e/api.cy.js` e 4 testes de interface em `cypress/e2e/interface.cy.js`, totalizando 24 execuções. CT07, CT08, CT09 e CT18 são exercitados em mais de uma camada. CT02 implementa a interpretação literal de “mais de 7 dias”: exatamente 7 dias não bloqueia; em produto real, confirmar o critério com Produto. CT19 valida reserva e renovação para usuário regular.
 
 ## Limitações conhecidas
 
@@ -45,7 +45,9 @@ A suíte `cypress/e2e/api.cy.js` contém um teste automatizado para cada ID CT01
 - A autenticação administrativa é simulada por cabeçalho `x-role`; não equivale a autenticação segura.
 - A falha da rotina é simulada por endpoint de teste.
 - A interface é intencionalmente simples e serve para validar apresentação dos estados.
-- CT19 deverá ser ampliado quando a aplicação demonstrativa incluir fluxo completo de criação de empréstimo.
+- CT16 valida leituras sucessivas no mesmo processo, não a recuperação após reinicialização do servidor.
+- A interface estática é acessível diretamente; a verificação de `x-role` protege endpoints administrativos, mas é apenas simulação e não autenticação real.
+- O desbloqueio manual pode remover o bloqueio mesmo com empréstimo elegível; a prioridade entre ação manual e regra automática precisa de definição de Produto.
 
 ## Evidências
 
