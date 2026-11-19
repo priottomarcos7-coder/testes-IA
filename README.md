@@ -2,7 +2,7 @@
 
 [![QA](https://img.shields.io/badge/Área-Quality%20Assurance-blue)](https://github.com/priottomarcos7-coder/qa-portifolio)
 [![AI](https://img.shields.io/badge/IA-Apoio%20à%20análise-purple)](https://github.com/priottomarcos7-coder/testes-IA)
-[![Status](https://img.shields.io/badge/Status-Projeto%20de%20estudo-informational)](https://github.com/priottomarcos7-coder/testes-IA)
+[![CI](https://github.com/priottomarcos7-coder/testes-IA/actions/workflows/tests.yml/badge.svg)](https://github.com/priottomarcos7-coder/testes-IA/actions/workflows/tests.yml)
 
 ## Objetivo
 
@@ -34,7 +34,9 @@ flowchart TD
 - Identificação de riscos e ações de mitigação.
 - Matriz de rastreabilidade entre requisitos e cenários.
 - Prompts para análise, geração e revisão de cenários.
-- Exemplo documentado de refinamento de prompt e revisão humana.\n- API REST demonstrativa com persistência local, perfil e painel administrativo.\n- 20 cenários automatizados com Cypress e verificações de interface.
+- Exemplo documentado de refinamento de prompt e revisão humana.
+- API REST demonstrativa com persistência local, perfil e painel administrativo.
+- 20 testes de API e 4 testes de interface automatizados com Cypress (24 execuções para 20 cenários funcionais rastreados).
 
 ## Como a IA foi utilizada
 
@@ -69,9 +71,28 @@ README.md
 | [Mini plano de testes](docs/05-mini-plano-de-testes.md) | Objetivo, escopo e critérios de entrada/saída |
 | [Prompts e revisão com IA](docs/06-prompts-ia.md) | Prompts, refinamento e revisão humana |
 | [Conclusão](docs/07-conclusao.md) | Principais aprendizados e pontos críticos |
-| [Matriz de rastreabilidade](docs/08-matriz-rastreabilidade.md) | Relação entre requisitos e cenários |\n| [Aplicação e testes executáveis](docs/09-aplicacao-e-testes.md) | Como iniciar a aplicação e executar os cenários |
+| [Matriz de rastreabilidade](docs/08-matriz-rastreabilidade.md) | Relação entre requisitos e cenários |
+| [Aplicação e testes executáveis](docs/09-aplicacao-e-testes.md) | Instalação, execução e limitações |
+| [Aplicação e testes executáveis](docs/09-aplicacao-e-testes.md) | Como iniciar a aplicação e executar os cenários |
 
-## Como executar\n\nPré-requisitos: Node.js 20+ e npm.\n\n```bash\nnpm install\nnpm start\n```\n\nEm outro terminal, execute a suíte completa:\n\n```bash\nnpm test\n```\n\nA aplicação fica em `http://localhost:3000`. O painel demonstrativo está em `/admin.html` e o perfil em `/profile.html?id=2`. O GitHub Actions executa os testes a cada push e pull request.\n\n## Resultado e aprendizado
+## Como executar
+
+Pré-requisitos: Node.js 20+ e npm.
+
+```bash
+npm install
+npm start
+```
+
+Em outro terminal:
+
+```bash
+npm test
+```
+
+Para executar separadamente, use `npm run test:api` ou `npm run test:ui`. A aplicação fica em `http://localhost:3000`, o painel em `/admin.html` e o perfil em `/profile.html?id=2`. O GitHub Actions executa a suíte em push e pull request direcionados à branch `main`.
+
+## Resultado e aprendizado
 
 O projeto demonstra que o uso de IA em QA exige direcionamento, validação e senso crítico. Um prompt mais específico pode ampliar a cobertura, mas cabe ao profissional verificar se as sugestões fazem sentido para os requisitos e para o produto.
 
@@ -97,7 +118,7 @@ This study project demonstrates how Artificial Intelligence can support Software
 
 The context is a library feature that automatically blocks users with books overdue by more than 7 days. The work documents requirements analysis, test scenarios, strategy, risks, and a mini test plan.
 
-> **Important:** this repository documents test planning and analysis. It is not an executed test suite and does not prove that the feature has been implemented in the reference system.
+ > **Note:** the application is an educational prototype, independent from EBAC's official system. The automated tests validate this prototype, not the reference system.
 
 ## Workflow
 
@@ -122,6 +143,9 @@ flowchart TD
 - Requirements-to-test traceability matrix.
 - Prompts for analysis, scenario generation, and review.
 - A documented example of prompt refinement and human review.
+- Demo REST API, profile and admin screens.
+- Cypress automation: 20 API tests and 4 UI tests.
+- GitHub Actions pipeline.
 
 ## Use of Artificial Intelligence
 
@@ -141,6 +165,10 @@ For example, the story says “more than 7 days.” Therefore, 8 days is a clear
 | [AI prompts and review](docs/06-prompts-ia.md) | Prompts, refinement, and human review |
 | [Conclusion](docs/07-conclusao.md) | Main learnings and critical points |
 | [Traceability matrix](docs/08-matriz-rastreabilidade.md) | Relationship between requirements and scenarios |
+
+## Test results and limitations
+
+The suite contains 24 automated executions: 20 API checks and 4 UI checks. CT07, CT08, CT09, and CT18 are exercised at more than one layer, so there are 20 functional scenarios and 24 automated test cases. Check the repository's Actions tab for the latest workflow result. The prototype uses simulated admin authorization and local JSON persistence; it is not production-ready.
 
 ## Learning Outcome
 
