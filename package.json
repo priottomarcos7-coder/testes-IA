@@ -11,6 +11,10 @@
     "test:api": "cypress run --spec 'cypress/e2e/api.cy.js'",
     "test:ui": "cypress run --spec 'cypress/e2e/interface.cy.js'"
   },
-  "dependencies": { "express": "^4.21.2" },
-  "devDependencies": { "cypress": "^15.11.0" }
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "cypress": "^15.11.0"
+  }
 }
