@@ -15,7 +15,7 @@ Os cenários abaixo foram definidos a partir da história de usuário e das dúv
 | ID | Prioridade | Tipo | Pré-condição / dados | Ação | Resultado esperado |
 |---|---|---|---|---|---|
 | CT01 | Alta | Positivo | Usuário ativo com um empréstimo em atraso há 8 dias | Executar processamento da regra | Usuário passa para bloqueado e o motivo do bloqueio fica registrado |
-| CT02 | Alta | Limite | Usuário ativo com atraso de exatamente 7 dias | Executar processamento | Resultado fica pendente até produto confirmar se o limite é inclusivo ou exclusivo |
+| CT02 | Alta | Limite | Usuário ativo com atraso de exatamente 7 dias | Executar processamento | No protótipo, permanece desbloqueado pela interpretação literal de “mais de 7 dias”; em produto real, confirmar o critério com Produto |
 | CT03 | Alta | Negativo | Usuário ativo com atraso de 6 dias | Executar processamento | Usuário permanece desbloqueado |
 | CT04 | Alta | Positivo | Usuário ativo sem empréstimos atrasados | Executar processamento | Usuário permanece desbloqueado |
 | CT05 | Alta | Negativo | Usuário já bloqueado | Tentar criar nova reserva | Operação é recusada e mensagem explica a restrição |
@@ -29,7 +29,7 @@ Os cenários abaixo foram definidos a partir da história de usuário e das dúv
 | CT13 | Alta | Segurança | Usuário sem permissão administrativa | Tentar remover bloqueio | Operação é negada e o status original é mantido |
 | CT14 | Alta | Erro | Dados de empréstimo inválidos ou indisponíveis | Executar cálculo do atraso | Sistema não aplica bloqueio incorreto e registra/trata a falha |
 | CT15 | Alta | Resiliência | Rotina automática indisponível ou com falha simulada | Executar processamento | Falha é registrada e existe tratamento/reprocessamento conforme decisão técnica |
-| CT16 | Média | Persistência | Usuário foi bloqueado corretamente | Reiniciar ou consultar novamente o sistema | Status do bloqueio permanece consistente |
+| CT16 | Média | Persistência | Usuário foi bloqueado corretamente | Consultar novamente o usuário na mesma execução | A API retorna o mesmo estado; a suíte atual não valida recuperação após reinicialização do servidor |
 | CT17 | Alta | Integração | Usuário bloqueado com acesso à API e interface | Consultar status nos dois canais | API e interface apresentam o mesmo estado |
 | CT18 | Média | Interface | Usuário bloqueado tenta realizar operação restrita | Consultar mensagem apresentada | Mensagem informa claramente o motivo e a ação impedida |
 | CT19 | Alta | Regressão | Usuário regular, sem atraso elegível | Realizar reserva e renovação permitidas | Funcionalidades continuam operando normalmente |
@@ -107,4 +107,4 @@ Cenário: Impedir remoção de bloqueio sem autorização
 5. Preparar massa de dados com usuários regulares, bloqueados e com múltiplos empréstimos.
 6. Registrar resultado obtido e evidências durante a execução.
 
-Este documento descreve cenários planejados. A execução depende de ambiente, dados e funcionalidades disponíveis no sistema de referência.
+Este documento descreve 20 cenários funcionais planejados. O protótipo automatiza CT01–CT20 na API e repete CT07, CT08, CT09 e CT18 na interface, totalizando 24 execuções. Isso valida somente o protótipo, não o sistema oficial de referência.
