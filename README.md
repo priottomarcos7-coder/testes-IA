@@ -10,7 +10,7 @@ Projeto de estudo desenvolvido para demonstrar como a Inteligência Artificial p
 
 O contexto utilizado é uma funcionalidade de biblioteca que bloqueia automaticamente usuários com livros em atraso por mais de 7 dias. O trabalho documenta análise de requisitos, cenários, estratégia, riscos e um mini plano de testes.
 
-> **Importante:** este repositório documenta planejamento e análise de testes. Não representa uma suíte de testes executada nem comprova que a funcionalidade foi implementada no sistema de referência.
+> **Aplicação demonstrativa:** além do planejamento, o repositório contém uma API e telas próprias para exercitar a regra de bloqueio. Trata-se de um ambiente didático, não do sistema oficial da EBAC. Os resultados só devem ser considerados aprovados após execução local ou no GitHub Actions.
 
 ## Fluxo de trabalho
 
@@ -34,7 +34,7 @@ flowchart TD
 - Identificação de riscos e ações de mitigação.
 - Matriz de rastreabilidade entre requisitos e cenários.
 - Prompts para análise, geração e revisão de cenários.
-- Exemplo documentado de refinamento de prompt e revisão humana.
+- Exemplo documentado de refinamento de prompt e revisão humana.\n- API REST demonstrativa com persistência local, perfil e painel administrativo.\n- 20 cenários automatizados com Cypress e verificações de interface.
 
 ## Como a IA foi utilizada
 
@@ -69,9 +69,9 @@ README.md
 | [Mini plano de testes](docs/05-mini-plano-de-testes.md) | Objetivo, escopo e critérios de entrada/saída |
 | [Prompts e revisão com IA](docs/06-prompts-ia.md) | Prompts, refinamento e revisão humana |
 | [Conclusão](docs/07-conclusao.md) | Principais aprendizados e pontos críticos |
-| [Matriz de rastreabilidade](docs/08-matriz-rastreabilidade.md) | Relação entre requisitos e cenários |
+| [Matriz de rastreabilidade](docs/08-matriz-rastreabilidade.md) | Relação entre requisitos e cenários |\n| [Aplicação e testes executáveis](docs/09-aplicacao-e-testes.md) | Como iniciar a aplicação e executar os cenários |
 
-## Resultado e aprendizado
+## Como executar\n\nPré-requisitos: Node.js 20+ e npm.\n\n```bash\nnpm install\nnpm start\n```\n\nEm outro terminal, execute a suíte completa:\n\n```bash\nnpm test\n```\n\nA aplicação fica em `http://localhost:3000`. O painel demonstrativo está em `/admin.html` e o perfil em `/profile.html?id=2`. O GitHub Actions executa os testes a cada push e pull request.\n\n## Resultado e aprendizado
 
 O projeto demonstra que o uso de IA em QA exige direcionamento, validação e senso crítico. Um prompt mais específico pode ampliar a cobertura, mas cabe ao profissional verificar se as sugestões fazem sentido para os requisitos e para o produto.
 
