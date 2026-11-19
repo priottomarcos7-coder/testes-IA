@@ -37,7 +37,7 @@ O endpoint `POST /api/test/reset` restaura dados conhecidos para execução repe
 
 ## Cenários
 
-A suíte `cypress/e2e/api.cy.js` contém um teste automatizado para cada ID CT01–CT20. CT02 interpreta o requisito “mais de 7 dias” como limite exclusivo. CT19 valida reserva e também a resposta de empréstimo inexistente, sem simular uma renovação válida porque a massa inicial não inclui um empréstimo ativo elegível para esse usuário.
+A suíte `cypress/e2e/api.cy.js` contém um teste automatizado para cada ID CT01–CT20. CT02 interpreta o requisito “mais de 7 dias” como limite exclusivo. CT19 valida reserva e renovação permitidas para um usuário regular com empréstimo ativo na massa de dados.
 
 ## Limitações conhecidas
 
