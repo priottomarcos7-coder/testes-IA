@@ -110,71 +110,70 @@ Projeto desenvolvido como parte da formação em Engenharia de Qualidade de Soft
 
 # English Version
 
-# Artificial Intelligence Testing — Reading Hub Test Plan
+# AI-Assisted Testing — Reading Hub Test Plan
 
 ## Goal
 
-This study project demonstrates how Artificial Intelligence can support Software Quality activities without replacing the QA professional's critical judgment.
+This study project demonstrates how Artificial Intelligence can support Software Quality Assurance without replacing the QA professional's critical thinking. The example is a library feature that blocks users with loans overdue by more than 7 days.
 
-The context is a library feature that automatically blocks users with books overdue by more than 7 days. The work documents requirements analysis, test scenarios, strategy, risks, and a mini test plan.
+The repository includes requirements analysis, test planning, a traceability matrix, and a self-contained demo application with a REST API, web screens, and Cypress automation.
 
- > **Note:** the application is an educational prototype, independent from EBAC's official system. The automated tests validate this prototype, not the reference system.
+> **Note:** the application is an educational prototype, independent from EBAC's official system. The automated tests validate this prototype, not the official reference system.
 
-## Workflow
+## What I developed
 
-```mermaid
-flowchart TD
-    A[User story] --> B[Analysis and questions]
-    B --> C[Test scenarios]
-    C --> D[Strategy and risks]
-    D --> E[Mini test plan]
-    E --> F[Critical review with AI support]
-    F --> G[Refined documentation]
-```
-
-## What I Developed
-
-- User story analysis and ambiguity identification.
-- Questions to clarify business rules with the product team.
-- Positive, negative, boundary, error, and integration scenarios.
-- Priorities, preconditions, test data, and expected results.
+- User story analysis, ambiguities, and questions for the product team.
+- 20 test scenarios (CT01–CT20), with priorities, test data, and expected results.
 - Functional, API, UI, integration, exploratory, and regression test strategy.
-- Risk identification and mitigation actions.
-- Requirements-to-test traceability matrix.
-- Prompts for analysis, scenario generation, and review.
-- A documented example of prompt refinement and human review.
-- Demo REST API, profile and admin screens.
+- Risk analysis and requirements-to-tests traceability matrix.
+- AI prompts, refinement example, and human review.
+- Demo REST API built with Node.js and Express, using local JSON persistence.
+- Demo user profile and admin dashboard.
 - Cypress automation: 20 API tests and 4 UI tests.
 - GitHub Actions pipeline.
 
-## Use of Artificial Intelligence
+## Run locally
 
-AI was used to expand analysis possibilities and organize test ideas. Its output was treated as suggestions: undefined rules were marked for product clarification, and scenarios were reviewed to avoid assuming behavior not specified in the story.
+Requirements: Node.js 20+ and npm.
 
-For example, the story says “more than 7 days.” Therefore, 8 days is a clear blocking example, while behavior on exactly day 7 must be confirmed with the product team.
+```bash
+npm install
+npm start
+```
 
-## Project Documentation
+In another terminal:
+
+```bash
+npm test
+```
+
+You can also run the API and UI suites separately with `npm run test:api` and `npm run test:ui`. The application runs at `http://localhost:3000`; the admin dashboard is at `/admin.html` and the user profile at `/profile.html?id=2`.
+
+## Project documentation
 
 | Document | Content |
 |---|---|
-| [User story analysis](docs/01-analise-historia.md) | Ambiguities, questions, and rules to clarify |
-| [Test scenarios](docs/02-cenarios-de-teste.md) | 20 scenarios with priorities, preconditions, and expected results |
-| [Test strategy](docs/03-estrategia-de-testes.md) | Validation approaches and suggested order |
-| [Risk analysis](docs/04-riscos.md) | Risks, impact, and mitigation |
-| [Mini test plan](docs/05-mini-plano-de-testes.md) | Objective, scope, and entry/exit criteria |
-| [AI prompts and review](docs/06-prompts-ia.md) | Prompts, refinement, and human review |
-| [Conclusion](docs/07-conclusao.md) | Main learnings and critical points |
-| [Traceability matrix](docs/08-matriz-rastreabilidade.md) | Relationship between requirements and scenarios |
+| [User story analysis](docs/01-analise-historia.md) | Ambiguities and questions |
+| [Test scenarios](docs/02-cenarios-de-teste.md) | 20 functional scenarios |
+| [Test strategy](docs/03-estrategia-de-testes.md) | Validation approaches |
+| [Risk analysis](docs/04-riscos.md) | Risks and mitigations |
+| [Mini test plan](docs/05-mini-plano-de-testes.md) | Scope and criteria |
+| [AI prompts and review](docs/06-prompts-ia.md) | Prompt refinement and human review |
+| [Conclusion](docs/07-conclusao.md) | Main learnings |
+| [Traceability matrix](docs/08-matriz-rastreabilidade.md) | Requirements mapped to scenarios |
+| [Application and executable tests](docs/09-aplicacao-e-testes.md) | Setup, execution, and limitations |
 
 ## Test results and limitations
 
-The suite contains 24 automated executions: 20 API checks and 4 UI checks. CT07, CT08, CT09, and CT18 are exercised at more than one layer, so there are 20 functional scenarios and 24 automated test cases. Check the repository's Actions tab for the latest workflow result. The prototype uses simulated admin authorization and local JSON persistence; it is not production-ready.
+The suite contains 24 automated executions: 20 API checks and 4 UI checks. CT07, CT08, CT09, and CT18 are exercised at more than one layer. Therefore, the project tracks 20 functional scenarios and has 24 automated test cases. Check the repository's Actions tab for the latest workflow result.
 
-## Learning Outcome
+The prototype uses simulated admin authorization, a local JSON file, and test setup endpoints. It is not production-ready. Its tests do not prove the behavior of EBAC's official system.
 
-The project shows that using AI in QA requires direction, validation, and critical thinking. A more specific prompt can improve test coverage, but the professional must verify whether the suggestions match the requirements and product behavior.
+## Use of AI
 
-## Reference Repository
+AI supported test idea generation and documentation. Suggestions were critically reviewed against the user story. For example, “more than 7 days” makes 8 days the first clearly eligible value, while the exact business rule should be confirmed with the product team.
+
+## Reference repository
 
 [Reading Hub Integrated — EBAC-QE](https://github.com/EBAC-QE/hub-de-leitura-integrado)
 
@@ -182,4 +181,4 @@ The project shows that using AI in QA requires direction, validation, and critic
 
 **Marcos Priotto**
 
-Project developed as part of the Software Quality Engineering training program at EBAC.
+Study project developed as part of Software Quality Engineering training.
