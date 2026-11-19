@@ -21,6 +21,8 @@ Esta matriz relaciona os requisitos e regras identificados na história aos cen�
 
 ## Como interpretar a matriz
 
+A coluna **Situação** descreve o nível de definição/validação do requisito com Produto, não o resultado da execução Cypress. A execução automatizada no protótipo é acompanhada pelo workflow do GitHub Actions.
+
 - **Regra principal descrita na história:** consta explicitamente no contexto da funcionalidade.
 - **A validar:** cenário planejado, ainda sem evidência de execução.
 - **Pendente de confirmação do produto:** a história não define o comportamento com precisão suficiente.
