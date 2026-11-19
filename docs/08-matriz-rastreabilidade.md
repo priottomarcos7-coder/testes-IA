@@ -1,12 +1,12 @@
 # Matriz de Rastreabilidade — Bloqueio por atraso
 
-Esta matriz relaciona os requisitos e regras identificados na história de usuário aos cenários de teste planejados. Ela ajuda a visualizar a cobertura e os pontos que ainda dependem de esclarecimento.
+Esta matriz relaciona os requisitos e regras identificados na história aos cenários funcionais CT01–CT20. A automação do protótipo exercita esses IDs na API e repete CT07, CT08, CT09 e CT18 na interface.
 
 | ID | Requisito / regra a validar | Cenários relacionados | Situação |
 |---|---|---|---|
 | RF01 | Bloquear automaticamente usuário com atraso superior a 7 dias | CT01, CT14, CT15 | Regra principal descrita na história |
 | RF02 | Não bloquear usuário abaixo do limite | CT03, CT04 | A validar |
-| RF03 | Definir comportamento no limite exato de 7 dias | CT02 | Pendente de confirmação do produto |
+| RF03 | Definir comportamento no limite exato de 7 dias | CT02 | Protótipo interpreta como não bloquear; confirmar com Produto |
 | RF04 | Impedir novas reservas de usuário bloqueado | CT05 | A validar |
 | RF05 | Impedir renovação de usuário bloqueado | CT06 | A validar |
 | RF06 | Exibir status e motivo do bloqueio | CT07, CT08, CT09, CT18 | Detalhes de interface pendentes |
@@ -15,7 +15,7 @@ Esta matriz relaciona os requisitos e regras identificados na história de usuá
 | RF09 | Permitir desbloqueio manual somente a perfil autorizado | CT12, CT13 | Permissões pendentes |
 | RF10 | Manter consistência entre API e interface | CT17 | A validar |
 | RF11 | Tratar falhas no cálculo e processamento automático | CT14, CT15 | Comportamento técnico pendente |
-| RF12 | Preservar o estado após nova consulta/reinicialização | CT16 | A validar |
+| RF12 | Preservar o estado após nova consulta/reinicialização | CT16 | Protótipo valida leituras sucessivas; reinicialização ainda não coberta |
 | RF13 | Registrar histórico de bloqueios e desbloqueios, se requerido | CT20 | Pendente de confirmação do produto |
 | RF14 | Não causar regressão em operações de usuários regulares | CT19 | A validar |
 
@@ -27,4 +27,4 @@ Esta matriz relaciona os requisitos e regras identificados na história de usuá
 
 ## Limitações
 
-A matriz representa rastreabilidade planejada, não comprova cobertura executada. Para transformar os cenários em testes aprovados, é necessário confirmar os critérios de aceite, executar no ambiente disponível e registrar evidências.
+A matriz representa rastreabilidade dos cenários e não comprova cobertura do sistema oficial. Os testes automatizados exercitam a aplicação demonstrativa do repositório. Para validar um produto real, é necessário confirmar critérios de aceite, executar no ambiente correspondente e registrar evidências.
