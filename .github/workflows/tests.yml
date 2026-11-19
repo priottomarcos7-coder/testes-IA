@@ -12,9 +12,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
       - run: npm install
       - run: npm start &
       - name: Aguardar API
-        run: npx wait-on http://localhost:3000/api/health
+        run: node -e "const wait=async()=>{for(let i=0;i<30;i++){try{const r=await fetch('http://localhost:3000/api/health');if(r.ok)process.exit(0)}catch{}await new Promise(r=>setTimeout(r,1000))}process.exit(1)};wait()"
       - run: npm test
