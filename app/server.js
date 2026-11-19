@@ -11,13 +11,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 const seed = () => ({
   users: [
     { id: 1, name: 'Ana Leitora', email: 'ana@hub.test', role: 'user', blocked: false, blockReason: null },
+    { id: 5, name: 'Elisa no Limite', email: 'elisa@hub.test', role: 'user', blocked: false, blockReason: null },
     { id: 2, name: 'Bruno Atrasado', email: 'bruno@hub.test', role: 'user', blocked: false, blockReason: null },
     { id: 3, name: 'Carla Regular', email: 'carla@hub.test', role: 'user', blocked: false, blockReason: null },
     { id: 4, name: 'Diego Bloqueado', email: 'diego@hub.test', role: 'user', blocked: true, blockReason: 'Empréstimo em atraso há 9 dias' }
   ],
   loans: [
     { id: 101, userId: 2, title: 'Livro em atraso', overdueDays: 8, returned: false },
-    { id: 102, userId: 3, title: 'Livro no limite', overdueDays: 6, returned: false },
+    { id: 102, userId: 3, title: 'Livro no limite', overdueDays: 7, returned: false },
+    { id: 105, userId: 1, title: 'Livro regular', overdueDays: 0, returned: false },
+    { id: 106, userId: 5, title: 'Livro com seis dias', overdueDays: 6, returned: false },
     { id: 103, userId: 4, title: 'Livro bloqueador', overdueDays: 9, returned: false },
     { id: 104, userId: 4, title: 'Segundo livro', overdueDays: 10, returned: false }
   ],
